@@ -18,14 +18,18 @@
         </p>
       </div>
       <div class="row">
-        <div class="col">
-          Classe: {{ artifact.role }}
-        </div>
+        <div class="col">Classe: {{ artifact.role }}</div>
         <div class="col">
           Raridade: <span v-for="n in artifact.rarity" :key="n">&star;</span>
         </div>
       </div>
-      <img :src="artifact.assets.image" class="card-img-top mx-auto" :alt="artifact.name" loading="lazy">
+      <img
+        v-if="imageUrl"
+        :src="imageUrl"
+        class="card-img-top mx-auto"
+        :alt="artifact.name"
+        loading="lazy"
+      />
     </div>
   </div>
 </template>
@@ -37,7 +41,7 @@ export default {
     return {
       artifact: {},
       error: false,
-      pending: false
+      pending: true
     };
   },
   async mounted() {
@@ -53,6 +57,11 @@ export default {
       this.error = true;
     } finally {
       this.pending = false;
+    }
+  },
+  computed: {
+    imageUrl() {
+      return this.artifact?.assets?.image;
     }
   }
 };

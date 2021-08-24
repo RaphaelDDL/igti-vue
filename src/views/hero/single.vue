@@ -25,7 +25,8 @@
         </div>
       </div>
       <img
-        :src="hero.assets.image"
+        v-if="imageUrl"
+        :src="imageUrl"
         class="card-img-top mx-auto"
         :alt="hero.name"
         loading="lazy"
@@ -41,7 +42,7 @@ export default {
     return {
       hero: {},
       error: false,
-      pending: false
+      pending: true
     };
   },
   async created() {
@@ -57,6 +58,11 @@ export default {
       this.error = true;
     } finally {
       this.pending = false;
+    }
+  },
+  computed: {
+    imageUrl() {
+      return this.hero?.assets?.image;
     }
   }
 };
