@@ -39,7 +39,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      hero: [],
+      hero: {},
       error: false,
       pending: false
     };
@@ -52,7 +52,7 @@ export default {
         `https://api.epicsevendb.com/hero/${this.$route.params.id}`
       );
       const { results = [] } = response?.data;
-      this.hero = results?.[0] ?? [];
+      this.hero = results?.[0] ?? {};
     } catch (error) {
       this.error = true;
     } finally {

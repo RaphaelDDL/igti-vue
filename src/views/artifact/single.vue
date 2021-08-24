@@ -35,7 +35,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      artifact: [],
+      artifact: {},
       error: false,
       pending: false
     };
@@ -48,7 +48,7 @@ export default {
         `https://api.epicsevendb.com/artifact/${this.$route.params.id}`
       );
       const { results = [] } = response?.data;
-      this.artifact = results?.[0] ?? [];
+      this.artifact = results?.[0] ?? {};
     } catch (error) {
       this.error = true;
     } finally {
